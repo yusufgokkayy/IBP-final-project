@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations - Holiday Village</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-hotel"></i> Holiday Village Management</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="login.html" class="nav-link">Login</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="reservations.html" class="nav-link active">Reservations</a>
+                <a href="timeshare.html" class="nav-link">Timeshare</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="reservation-section">
+                <h2><i class="fas fa-calendar-check"></i> Make a Reservation</h2>
+                
+                <div class="reservation-container">
+                    <div class="reservation-form-card">
+                        <h3>Book Your Stay</h3>
+                        <div id="error-message" class="error-message" style="display: none;"></div>
+                        <div id="success-message" class="success-message" style="display: none;"></div>
+                        
+                        <form id="reservationForm" action="php/make_reservation.php" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="checkIn">Check-in Date:</label>
+                                    <input type="date" id="checkIn" name="checkIn" required>
+                                    <span class="error-span" id="checkInError"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="checkOut">Check-out Date:</label>
+                                    <input type="date" id="checkOut" name="checkOut" required>
+                                    <span class="error-span" id="checkOutError"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="accommodationType">Accommodation Type:</label>
+                                    <select id="accommodationType" name="accommodationType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="hotel">Hotel Room</option>
+                                        <option value="house">Holiday House</option>
+                                    </select>
+                                    <span class="error-span" id="accommodationTypeError"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="guests">Number of Guests:</label>
+                                    <input type="number" id="guests" name="guests" min="1" max="8" required>
+                                    <span class="error-span" id="guestsError"></span>
+                                </div>
+                            </div>
+                            
+                            <div id="hotelSelection" class="form-group" style="display: none;">
+                                <label for="hotel">Select Hotel:</label>
+                                <select id="hotel" name="hotel">
+                                    <option value="">Select Hotel</option>
+                                </select>
+                                <span class="error-span" id="hotelError"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="specialRequests">Special Requests:</label>
+                                <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any special requirements or preferences..."></textarea>
+                            </div>
+                            
+                            <button type="button" id="checkAvailability" class="btn btn-secondary">
+                                <i class="fas fa-search"></i> Check Availability
+                            </button>
+                            
+                            <div id="availabilityResults" class="availability-results" style="display: none;">
+                                <!-- AJAX results will be loaded here -->
+                            </div>
+                            
+                            <button type="submit" id="makeReservation" class="btn btn-primary btn-full" style="display: none;">
+                                <i class="fas fa-check"></i> Make Reservation
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="pricing-info">
+                        <h3>Pricing Information</h3>
+                        <div class="price-card">
+                            <h4>Hotel Deniz</h4>
+                            <ul>
+                                <li>Standard Room: $120/night</li>
+                                <li>Sea View Room: $180/night</li>
+                                <li>Suite: $250/night</li>
+                            </ul>
+                        </div>
+                        <div class="price-card">
+                            <h4>Hotel Orman</h4>
+                            <ul>
+                                <li>Standard Room: $100/night</li>
+                                <li>Forest View Room: $150/night</li>
+                                <li>Suite: $220/night</li>
+                            </ul>
+                        </div>
+                        <div class="price-card">
+                            <h4>Holiday Houses</h4>
+                            <ul>
+                                <li>Single Story: $200/night</li>
+                                <li>Double Story: $300/night</li>
+                                <li>With Pool: +$50/night</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="my-reservations" id="myReservations" style="display: none;">
+                <h2><i class="fas fa-list"></i> My Reservations</h2>
+                <div id="reservationsList">
+                    <!-- User reservations will be loaded here via AJAX -->
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Holiday Village Management System. All rights reserved.</p>
+        </footer>
+    </div>    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/reservations.js"></script>
+</body>
+</html>

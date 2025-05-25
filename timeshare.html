@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeshare - Holiday Village</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-hotel"></i> Holiday Village Management</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="login.html" class="nav-link">Login</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="reservations.html" class="nav-link">Reservations</a>
+                <a href="timeshare.html" class="nav-link active">Timeshare</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="timeshare-hero">
+                <h2><i class="fas fa-key"></i> Timeshare Opportunities</h2>
+                <p>Own a piece of paradise! Our timeshare program offers you the opportunity to own vacation time in our beautiful holiday houses.</p>
+                
+                <div class="eligibility-notice">
+                    <h3><i class="fas fa-info-circle"></i> Eligibility Requirements</h3>
+                    <ul>
+                        <li>Must be over 30 years of age</li>
+                        <li>Must be married</li>
+                        <li>Valid identification required</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="timeshare-properties">
+                <h2>Available Timeshare Properties</h2>
+                <div id="timeshareList" class="timeshare-grid">
+                    <!-- Timeshare properties will be loaded via AJAX -->
+                </div>
+            </section>
+
+            <section class="timeshare-application" id="timeshareApplication" style="display: none;">
+                <div class="application-card">
+                    <h3><i class="fas fa-file-contract"></i> Timeshare Application</h3>
+                    <div id="error-message" class="error-message" style="display: none;"></div>
+                    <div id="success-message" class="success-message" style="display: none;"></div>
+                    
+                    <form id="timeshareForm" action="php/apply_timeshare.php" method="POST">
+                        <input type="hidden" id="selectedProperty" name="propertyId">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="preferredPeriod">Preferred Period:</label>
+                                <select id="preferredPeriod" name="preferredPeriod" required>
+                                    <option value="">Select Period</option>
+                                    <option value="spring">Spring (March-May)</option>
+                                    <option value="summer">Summer (June-August)</option>
+                                    <option value="autumn">Autumn (September-November)</option>
+                                    <option value="winter">Winter (December-February)</option>
+                                </select>
+                                <span class="error-span" id="preferredPeriodError"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="duration">Duration (weeks):</label>
+                                <select id="duration" name="duration" required>
+                                    <option value="">Select Duration</option>
+                                    <option value="1">1 Week</option>
+                                    <option value="2">2 Weeks</option>
+                                    <option value="4">4 Weeks</option>
+                                    <option value="8">8 Weeks</option>
+                                </select>
+                                <span class="error-span" id="durationError"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">Budget Range (USD):</label>
+                            <select id="budget" name="budget" required>
+                                <option value="">Select Budget</option>
+                                <option value="10000-25000">$10,000 - $25,000</option>
+                                <option value="25000-50000">$25,000 - $50,000</option>
+                                <option value="50000-100000">$50,000 - $100,000</option>
+                                <option value="100000+">$100,000+</option>
+                            </select>
+                            <span class="error-span" id="budgetError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additionalRequests">Additional Requests:</label>
+                            <textarea id="additionalRequests" name="additionalRequests" rows="3" placeholder="Pool preference, specific amenities, etc."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="my-timeshares" id="myTimeshares" style="display: none;">
+                <h2><i class="fas fa-clipboard-list"></i> My Timeshare Contracts</h2>
+                <div id="contractsList">
+                    <!-- User contracts will be loaded here via AJAX -->
+                </div>
+            </section>
+
+            <section class="timeshare-benefits">
+                <h2>Why Choose Our Timeshare Program?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Your Own Vacation Home</h3>
+                        <p>Enjoy the comfort and privacy of your own vacation property</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-swimming-pool"></i>
+                        <h3>Premium Amenities</h3>
+                        <p>Many properties feature private pools and luxury amenities</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Flexible Scheduling</h3>
+                        <p>Multiple periods available throughout the year</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Investment Value</h3>
+                        <p>Timeshare properties maintain their value over time</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Holiday Village Management System. All rights reserved.</p>
+        </footer>
+    </div>    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/timeshare.js"></script>
+</body>
+</html>
